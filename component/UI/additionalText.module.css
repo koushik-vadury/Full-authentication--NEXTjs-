@@ -1,0 +1,12 @@
+.additional {
+  padding: 0rem 1.2rem;
+  font-size: 1.4rem;
+}
+.additional a {
+  margin-left: 0.5rem;
+  transition: all 0.2s;
+}
+
+.additional a:hover {
+  color: #4d4d4d;
+}

@@ -1,0 +1,41 @@
+.formInput {
+  padding: 1.2rem;
+}
+.inputGroup,
+.wrongInput {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.5rem;
+  padding: 1.2rem;
+}
+.inputGroup label,
+.wrongInput label {
+  margin-bottom: 1.2rem;
+  text-transform: uppercase;
+  font-weight: 500;
+  width: fit-content;
+}
+.inputGroup input {
+  padding: 1.2rem;
+  border: 0.1rem solid #4d4d4d;
+  border-radius: 0.2rem;
+}
+
+.inputGroup input:focus {
+  background-color: rgba(77, 77, 77, 20%);
+}
+
+.wrongInput input {
+  border: 0.1rem solid red;
+  padding: 1.2rem;
+  border-radius: 0.2rem;
+}
+.wrongInput input:focus {
+  background-color: rgba(255, 0, 0, 0.15);
+  border: none;
+  outline: none;
+  border: 0.1rem solid red;
+}
+.wrongInput label {
+  color: red;
+}

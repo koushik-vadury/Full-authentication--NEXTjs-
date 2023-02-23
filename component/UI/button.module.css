@@ -1,0 +1,33 @@
+.btn {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.5rem;
+  padding: 1.2rem;
+}
+
+.btn button {
+  padding: 1.2rem;
+  display: inline-block;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1.5rem;
+  background-color: #4d4d4d;
+  border: none;
+  color: white;
+  transition: all 0.3s;
+}
+
+.btn button:hover {
+  background-color: rgba(41, 41, 41, 0.9);
+  box-shadow: 0 0.2rem 0.4rem rgba(77, 77, 77, 20%);
+}
+
+.btn button:disabled,
+.btn button:hover:disabled,
+.btn button:active:disabled {
+  background: none;
+  color: #4d4d4d;
+  border: 0.1rem solid #4d4d4d;
+  cursor: not-allowed;
+}
