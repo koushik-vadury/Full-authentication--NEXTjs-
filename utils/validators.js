@@ -8,10 +8,14 @@ export const validateLoginForm = (email, password) => {
 export const validateRegisterForm = (email, username, password, cPassword) => {
   const isMailValid = validateMail(email);
   const isPasswordValid = validatePassword(password);
-  const isCPasswordValid = validatePassword(cPassword);
   const isusernamevalid = validateUsername(username);
+  const isCPasswordValid = validatePassword(cPassword);
 
   return isMailValid && isPasswordValid && isusernamevalid && isCPasswordValid;
+};
+
+export const validatePasswordAndCPassword = (password, cPassword) => {
+  return password === cPassword;
 };
 export const validateUsername = (username) => {
   return username.trim().length > 3 && username.trim().length < 21;

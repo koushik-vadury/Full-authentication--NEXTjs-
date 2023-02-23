@@ -10,6 +10,7 @@ import {
   validatePassword,
   validateRegisterForm,
   validateUsername,
+  validatePasswordAndCPassword,
 } from "../utils/validators";
 
 export default function Home() {
@@ -38,12 +39,23 @@ export default function Home() {
       passwordValue,
       cPasswordValue
     );
-
-    dispatch(formDataActions.setSignUpFormValid(signUpFormIsValid));
+    const passAndCpassword = validatePasswordAndCPassword(
+      passwordValue,
+      cPasswordValue
+    );
+    dispatch(
+      formDataActions.setSignUpFormValid(signUpFormIsValid && passAndCpassword)
+    );
   }, [emailValue, passwordValue, nameValue, cPasswordValue]);
-
+  console.table(formData);
   const signupFormHandler = async (event) => {
     event.preventDefault();
+    console.log({
+      name: nameValue,
+      email: emailValue,
+      password: passwordValue,
+      cPassword: cPasswordValue,
+    });
     await fetch("/api/signup", {
       method: "POST",
       body: JSON.stringify({
@@ -58,9 +70,6 @@ export default function Home() {
     })
       .then((response) => console.log(response))
       .catch((err) => err.message);
-    // console.log(response);
-    // const result = await response.json();
-    // console.log(result);
   };
 
   return (
@@ -123,6 +132,7 @@ export default function Home() {
           {!formData.password.isValid && formData.password.isTouched && (
             <p>Password must be min 7 char. & max 14 char.</p>
           )}
+
           <Input
             id="cpassword"
             type="password"
@@ -138,9 +148,12 @@ export default function Home() {
               !formData.cPassword.isValid && formData.cPassword.isTouched
             ).toString()}
           />
-          {!formData.cPassword.isValid && formData.cPassword.isTouched && (
+          {(!formData.cPassword.isValid && formData.cPassword.isTouched && (
             <p>Password must be min 7 char. & max 14 char.</p>
-          )}
+          )) ||
+            (formData.password.value !== formData.cPassword.value && (
+              <p>Password & confirm password are not same</p>
+            ))}
           <Button type="submit" signUpFormValid={formData.signUpFormValid}>
             Signup
           </Button>
