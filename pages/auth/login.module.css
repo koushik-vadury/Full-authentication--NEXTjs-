@@ -20,4 +20,10 @@
   margin-top: -0.8rem;
 }
 
-
+.forgot {
+  font-size: 1.3rem;
+  padding: 0 1.2rem;
+  display: flex;
+  justify-content: flex-end;
+  color: #4d4d4d;
+}

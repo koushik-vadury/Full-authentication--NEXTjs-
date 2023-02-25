@@ -46,7 +46,7 @@ export default function Home() {
     dispatch(
       formDataActions.setSignUpFormValid(signUpFormIsValid && passAndCpassword)
     );
-  }, [emailValue, passwordValue, nameValue, cPasswordValue]);
+  }, [emailValue, passwordValue, nameValue, cPasswordValue, dispatch]);
   console.table(formData);
   const signupFormHandler = async (event) => {
     event.preventDefault();
@@ -56,20 +56,20 @@ export default function Home() {
       password: passwordValue,
       cPassword: cPasswordValue,
     });
-    await fetch("/api/signup", {
-      method: "POST",
-      body: JSON.stringify({
-        name: nameValue,
-        email: emailValue,
-        password: passwordValue,
-        cPassword: cPasswordValue,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => console.log(response))
-      .catch((err) => err.message);
+    // await fetch("/api/signup", {
+    //   method: "POST",
+    //   body: JSON.stringify({
+    //     name: nameValue,
+    //     email: emailValue,
+    //     password: passwordValue,
+    //     cPassword: cPasswordValue,
+    //   }),
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // })
+    //   .then((response) => console.log(response))
+    //   .catch((err) => err.message);
   };
 
   return (
@@ -93,9 +93,14 @@ export default function Home() {
               !formData.name.isValid && formData.name.isTouched
             ).toString()}
           />
-          {!formData.name.isValid && formData.name.isTouched && (
-            <p>Username must be min 4 char. & max 20 char.</p>
-          )}
+          {(!formData.name.isValid &&
+            formData.name.isTouched &&
+            formData.name.value.trim() !== "" && (
+              <p>Username must be min 4 char. & max 20 char.</p>
+            )) ||
+            (formData.name.isTouched && formData.name.value.trim() === "" && (
+              <p>Username required</p>
+            ))}
           <Input
             id="email"
             type="email"
@@ -129,9 +134,16 @@ export default function Home() {
               !formData.password.isValid && formData.password.isTouched
             ).toString()}
           />
-          {!formData.password.isValid && formData.password.isTouched && (
-            <p>Password must be min 7 char. & max 14 char.</p>
-          )}
+
+          {(!formData.password.isValid &&
+            formData.password.isTouched &&
+            formData.password.value.trim() !== "" && (
+              <p>Password must be min 7 char. & max 14 char.</p>
+            )) ||
+            (formData.password.isTouched &&
+              formData.password.value.trim() === "" && (
+                <p>Password required</p>
+              ))}
 
           <Input
             id="cpassword"
@@ -148,12 +160,19 @@ export default function Home() {
               !formData.cPassword.isValid && formData.cPassword.isTouched
             ).toString()}
           />
-          {(!formData.cPassword.isValid && formData.cPassword.isTouched && (
-            <p>Password must be min 7 char. & max 14 char.</p>
-          )) ||
-            (formData.password.value !== formData.cPassword.value && (
-              <p>Password & confirm password are not same</p>
-            ))}
+          {(!formData.cPassword.isValid &&
+            formData.cPassword.isTouched &&
+            formData.cPassword.value.trim() !== "" && (
+              <p>confirm password must be min 7 char. & max 14 char.</p>
+            )) ||
+            (formData.cPassword.isTouched &&
+              formData.cPassword.value.trim() === "" && (
+                <p> Confirm password required</p>
+              )) ||
+            (formData.password.value !== formData.cPassword.value &&
+              formData.cPassword.isTouched && (
+                <p>Password & confirm password are not same</p>
+              ))}
           <Button type="submit" signUpFormValid={formData.signUpFormValid}>
             Signup
           </Button>
