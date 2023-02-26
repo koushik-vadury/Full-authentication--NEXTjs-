@@ -1,0 +1,24 @@
+.notification {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3rem;
+  width: 100%;
+  overflow: hidden;
+  color: white;
+}
+.notification div {
+  font-size: 1.5rem;
+  font-weight: normal;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.success {
+  background-color: green;
+}
+.error {
+  background-color: red;
+}

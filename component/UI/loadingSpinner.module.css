@@ -1,0 +1,41 @@
+.dualRing {
+  display: inline-block;
+  height: 0rem;
+  padding: 0.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dualRing:after {
+  content: " ";
+  display: block;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  border: 4px solid #4d4d4d;
+  border-color: #4d4d4d transparent #4d4d4d transparent;
+  animation: dualRing 0.8s linear infinite;
+}
+
+.loadingSpinnerOverlay {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(27, 27, 27, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.8rem;
+}
+
+@keyframes dualRing {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
